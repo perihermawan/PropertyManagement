@@ -1,0 +1,9 @@
+﻿/propertymanagement.service/.vs/
+/propertymanagement.service/propertymanagement.service/bin/
+/propertymanagement.service/propertymanagement.service/obj/
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/propertymanagement.service/propertymanagement.service/obj/Release/net5.0
+/propertymanagement.service/propertymanagement.service/Properties/PublishProfiles
