@@ -25,5 +25,10 @@ namespace propertymanagement.service.Models.ViewModel
         public string UnitOwner { get; set; }
         public string TenantOwner { get; set; }
         public string Status { get; set; }
+        public decimal RentAmount { get; set; }
+        public decimal OutstandingAmount { get; set; }
+        public int Installments { get; set; }
+        public DateTime ChargeDateTo { get; set; }
+        public DateTime ChargeDateFrom { get; set; }
     }
 }

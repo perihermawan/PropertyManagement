@@ -22,7 +22,10 @@ namespace propertymanagement.service.Repositories.IRepositories
         Task<List<StatusResult>> DeleteRentAmountByRentId(Guid unitId, string userId, string reason);
 
         #endregion
+        #region 
+        Task<List<NonStandardViewModel>> GetNonStandardList();
 
+        #endregion
         #region Rent
         Task<List<RentListModel>> GetRentList();
         #endregion

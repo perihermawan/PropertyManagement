@@ -226,10 +226,31 @@ namespace propertymanagement.service.Repositories
             }
             return outletTypeLists;
         }
-        #endregion
+
 
         #endregion
 
+        #endregion
+
+        #endregion
+        #region NonStandard
+        public async Task<List<NonStandardViewModel>> GetNonStandardList()
+        {
+            List<NonStandardViewModel> result = new List<NonStandardViewModel>();
+            try
+            {
+                //Context.Database.Comm
+                using (var context = new DatabaseContext(ContextOption))
+                {
+                    result = await context.ExecuteStoredProcedure<NonStandardViewModel>("sp_get_NonStandardList");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error !, " + e.Message);
+            }
+            return result;
+        }
         #endregion
     }
 }

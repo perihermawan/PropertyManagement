@@ -162,5 +162,31 @@ namespace propertymanagement.service.Controllers
             }
             return HttpResponse(HttpResults);
         }
+
+        #region Non Standard
+        #region HTTP GET
+        [HttpGet("GetNonStandardList")]
+        [ProducesResponseType(typeof(ResponseData<object>), 200)]
+        public IActionResult GetNonStandardList()
+        {
+            int total = 0;
+            try
+            {
+                var listNonStandard = IUnitOfWorks.UnitOfMarketingRepository().GetNonStandardList();
+                HttpResults = new ResponseData<object>("GET NON STANDARD LIST ALL", SPA.System.Web.StatusCode.OK, StatusMessage.Success, listNonStandard.Result);
+            }
+            catch (Exception ex)
+            {
+                int exCode = ex.HResult;
+                if (exCode == -2147467259)
+                    HttpResults = new ResponseMessage(SPA.System.Web.StatusCode.InternalServerErrorException, StatusMessage.Error, ex.Message, total);
+                else
+                    HttpResults = new ResponseMessage(SPA.System.Web.StatusCode.UnprocessableEntity, StatusMessage.Fail, ex.Message, total);
+            }
+            return HttpResponse(HttpResults);
+        }
+        #endregion
+        #endregion
+
     }
 }

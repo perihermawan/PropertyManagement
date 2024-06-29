@@ -9,6 +9,7 @@ using propertymanagement.service.Commons;
 using propertymanagement.service.Hubs;
 using propertymanagement.service.Models.Master;
 using propertymanagement.service.Models.DTO;
+using propertymanagement.service.Models.Marketing;
 using propertymanagement.service.Models.ViewModel;
 using SPA.System.Data;
 using SPA.System.Web;
@@ -89,6 +90,25 @@ namespace propertymanagement.service.Controllers
             }
 
             return HttpResponse(HttpResults);
+        }
+        [HttpPost("CreateNonStandardDetail/{userId}")]
+        public IActionResult CreateNonStandardDetail(string userId, [FromBody] string model)
+        {
+            
+            NonStandardModel data = JsonConvert.DeserializeObject<NonStandardModel>(model);
+            List<NonStandardItem> RowState = data.RowState;
+            foreach (NonStandardItem item in RowState)
+            {
+                IUnitOfWorks.UnitOfCommonRepository().ExecuteSPNonStandardDetail(item, userId, data.remark);
+            }
+             HttpResults = new ResponseData<object>("Execute Data successfully", SPA.System.Web.StatusCode.OK, StatusMessage.Success, model);
+
+
+            return HttpResponse(HttpResults);
+            // HttpResults = new ResponseMessage(200, "", "", "");
+           
+
+            // return data
         }
         #endregion
 
