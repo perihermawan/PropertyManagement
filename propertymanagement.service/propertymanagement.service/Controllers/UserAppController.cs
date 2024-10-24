@@ -167,7 +167,7 @@ namespace propertymanagement.service.Controllers
             return HttpResponse(HttpResults);
         }
 
-        [HttpPut("EditPassword")]
+        [HttpPost("EditPassword")]
         [ProducesResponseType(typeof(ResponseData<object>), 200)]
         public IActionResult EditPassword([FromBody] EditPasswordModel model)
         {

@@ -22,6 +22,7 @@ namespace propertymanagement.service.Commons
         private CommonRepository CommonRepositories;
         private UserManagementRepository UserManagementRepositories;
         private MarketingRepository MarketingRepositories;
+        private ChargeRepository ChargeRepositories;
 
         #endregion
 
@@ -162,6 +163,15 @@ namespace propertymanagement.service.Commons
                 MarketingRepositories = new MarketingRepository(Context);
             }
             return MarketingRepositories;
+        }
+
+        public ChargeRepository UnitOfChargeRepository()
+        {
+            if (ChargeRepositories == null)
+            {
+                ChargeRepositories = new ChargeRepository(Context);
+            }
+            return ChargeRepositories;
         }
         #endregion
 

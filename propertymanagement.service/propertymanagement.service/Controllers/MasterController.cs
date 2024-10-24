@@ -178,7 +178,7 @@ namespace propertymanagement.service.Controllers
             return HttpResponse(HttpResults);
         }
 
-        [HttpPut("DeleteEmployeeById/{employeeid}/{user}")]
+        [HttpPost("DeleteEmployeeById/{employeeid}/{user}")]
         [ProducesResponseType(typeof(ResponseData<object>), 200)]
         public IActionResult DeleteEmployeeById(int employeeid, string user)
         {

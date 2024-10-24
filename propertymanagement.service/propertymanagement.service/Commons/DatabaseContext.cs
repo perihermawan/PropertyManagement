@@ -38,6 +38,10 @@ namespace propertymanagement.service.Commons
 
         #endregion
 
+        #region Management Fee and utility
+        public DbSet<TenantMgtListModel> dbset_VW_FRMTENANTMGTLIST { get; set; }
+        #endregion
+
         #endregion
 
 

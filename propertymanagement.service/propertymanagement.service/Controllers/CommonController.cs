@@ -9,7 +9,6 @@ using propertymanagement.service.Commons;
 using propertymanagement.service.Hubs;
 using propertymanagement.service.Models.Master;
 using propertymanagement.service.Models.DTO;
-using propertymanagement.service.Models.Marketing;
 using propertymanagement.service.Models.ViewModel;
 using SPA.System.Data;
 using SPA.System.Web;
@@ -91,26 +90,34 @@ namespace propertymanagement.service.Controllers
 
             return HttpResponse(HttpResults);
         }
-        [HttpPost("CreateNonStandardDetail/{userId}")]
-        public IActionResult CreateNonStandardDetail(string userId, [FromBody] string model)
-        {
-            
-            NonStandardModel data = JsonConvert.DeserializeObject<NonStandardModel>(model);
-            List<NonStandardItem> RowState = data.RowState;
-            foreach (NonStandardItem item in RowState)
-            {
-                IUnitOfWorks.UnitOfCommonRepository().ExecuteSPNonStandardDetail(item, userId, data.remark);
-            }
-             HttpResults = new ResponseData<object>("Execute Data successfully", SPA.System.Web.StatusCode.OK, StatusMessage.Success, model);
+        #endregion
 
+        [HttpPost("ExecuteSP/{spName}")]
+        [ProducesResponseType(typeof(ResponseData<UnitModel>), 200)]
+        public IActionResult ExecuteSP(string spName, [FromBody] string model)
+        {
+            int total = 0;
+            try
+            {
+                var hasil = IUnitOfWorks.UnitOfCommonRepository().ExecuteSP(spName, model);
+                var resultData = hasil.Result;
+                if (resultData[0].STATUS.ToLower() == "success")
+                    HttpResults = new ResponseData<object>("Execute Data successfully", SPA.System.Web.StatusCode.OK, StatusMessage.Success, model);
+                else
+                    HttpResults = new ResponseData<object>(hasil.Result[0].MESSAGE, SPA.System.Web.StatusCode.OK, StatusMessage.Fail, model);
+
+            }
+            catch (Exception ex)
+            {
+                int exCode = ex.HResult;
+                if (exCode == -2147467259)
+                    HttpResults = new ResponseMessage(SPA.System.Web.StatusCode.InternalServerErrorException, StatusMessage.Error, ex.Message, total);
+                else
+                    HttpResults = new ResponseMessage(SPA.System.Web.StatusCode.UnprocessableEntity, StatusMessage.Fail, ex.Message, total);
+            }
 
             return HttpResponse(HttpResults);
-            // HttpResults = new ResponseMessage(200, "", "", "");
-           
-
-            // return data
         }
-        #endregion
 
 
         #region Http Put
@@ -141,7 +148,7 @@ namespace propertymanagement.service.Controllers
             return HttpResponse(HttpResults);
         }
 
-        [HttpPut("ExecuteSPDelete/{spname}/{id}/{user}")]
+        [HttpPost("ExecuteSPDelete/{spname}/{id}/{user}")]
         [ProducesResponseType(typeof(ResponseData<Object>), 200)]
         public IActionResult ExecuteSPDelete(string spname, string id, string user)
         {

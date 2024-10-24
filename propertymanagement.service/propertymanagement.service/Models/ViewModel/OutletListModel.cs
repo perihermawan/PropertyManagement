@@ -9,7 +9,11 @@ namespace propertymanagement.service.Models.ViewModel
 {
     public class OutletListModel
     {
-        public Guid? outletId { get; set; }
-        public string outletName { get; set; }
+        public Guid? OutletId { get; set; }
+        public string OutletName { get; set; }
+        public string OutletTypeName { get; set; }
+        public Guid? lobId { get; set; }
+        public string lobname { get; set; }
+        public string subLob { get; set; }
     }
 }

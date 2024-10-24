@@ -12,6 +12,7 @@ namespace propertymanagement.service.Repositories.IRepositories
     interface ICommonRepository
     {
         #region Common
+        Task<List<StatusResult>> ExecuteSP(string spname, string json);
         Task<List<StatusResult>> ExecuteSP(string spname, string json, string user);
         Task<List<StatusResult>> ExecuteSPDelete(string spname, string id, string user);
         #endregion

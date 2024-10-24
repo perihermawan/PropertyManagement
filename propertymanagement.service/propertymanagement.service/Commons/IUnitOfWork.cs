@@ -35,6 +35,7 @@ namespace propertymanagement.service.Commons
         #region Marketing
 
         MarketingRepository UnitOfMarketingRepository();
+        ChargeRepository UnitOfChargeRepository();
 
         #endregion
 

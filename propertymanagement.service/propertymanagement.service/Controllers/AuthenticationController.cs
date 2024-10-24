@@ -61,7 +61,8 @@ namespace propertymanagement.service.Controllers
                         PHONE = "",
                         DIVISIONID = "",
                         MENULIST = menuList.Result,
-                        PERMISSIONLIST = permissionList.Result
+                        PERMISSIONLIST = permissionList.Result,
+                        COMPID = dataUser.Result.CompId
                         //BusinessGroup = "WCS Jakarta",
                         //BusinessUnitDivisi = "System Analyst Developer",
                         //BusinessUnitDepartment = ""
@@ -84,5 +85,7 @@ namespace propertymanagement.service.Controllers
             }
             return HttpResponse(HttpResults);
         }
+
+
     }
 }
